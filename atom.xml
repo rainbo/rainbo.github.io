@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Rainbo's Blog]]></title>
+  <subtitle><![CDATA[丢了下巴的程序猿]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://rainbo.me/"/>
+  <updated>2014-06-09T07:51:57.734Z</updated>
+  <id>http://rainbo.me/</id>
+  
+  <author>
+    <name><![CDATA[rainbo]]></name>
+    
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[让 bitbucket 也能在 windows 上正常工作]]></title>
+    <link href="http://rainbo.me/mark-git-ssh-work-on-windows-to-bitbucket/"/>
+    <id>http://rainbo.me/mark-git-ssh-work-on-windows-to-bitbucket/</id>
+    <published>2013-07-04T01:22:16.000Z</published>
+    <updated>2014-06-09T05:58:07.000Z</updated>
+    <content type="html"><![CDATA[<p>最近墙越来越高，继 github 被和谐后，bitbucket 也沦陷了。这是一件杯具的事情，因为我和 胖子@vfasky  正在上面酝酿我们的 <strong>Catke 计划</strong>，英明神武的我们怎能为万恶的墙低下高贵的头！胖子立马翻出 mac 下的代理神器，稍做配置便让 git 使用 ssh 协议时轻松翻墙。</p>
+<p>详情参考：<a href="https://vfasky.com/2013-05-23/mac-shadowsocks-proxy-bitbucket/" target="_blank" rel="external">mac 上通过 shadowsocks 代理让 bitbucket 的 git 正常工作</a>。</p>
+<h2 id="Windows_上的杯具">Windows 上的杯具</h2>
+<p>但是杯具还在继续，这让哥的 windows 情何以堪！墙虽然灰常高大，但却不能阻挡一个小强翻墙的心。</p>
+<a id="more"></a>
+
+<h3 id="尝试">尝试</h3>
+<p>我开始研究胖子的配置，依样画葫芦的在 windows 下建立 ssh 配置文件，并设置代理配置，我以为我很聪明，但是其实不是 <strong>-__-#</strong>。</p>
+<h3 id="理解">理解</h3>
+<p>命令没有意外的报错了，错误提示找不到 <strong>nc</strong> 命令，我恍然大悟，原来 nc 是大名鼎鼎的 <strong>netcat</strong>，ssh 配置中 ProxyCommand 的意思是使用一个外置命令来做代理。</p>
+<h3 id="解决">解决</h3>
+<p>如果我的思路没有错的话，那我找一个 windows 版本的 netcat 不就完了，可是 Google 了很久，发现 windows 下的 nc 都没有代理参数，所以只能退而求其次，找到另一款代理工具 <strong>connect</strong>，由于我使用的是 <strong>Github Shell</strong>，所以已经自带了该工具，对 ssh 配置稍微修改。</p>
+<p><figure class="highlight"><pre>Host bitbucket.org
+ProxyCommand <span class="keyword">connect</span> -S <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7070</span> <span class="variable">%h</span> <span class="variable">%p</span>
+</pre></figure><br>终于 bitbucket 在 windows 在也如愿以偿的翻墙了。内流满面啊～～～</p>
+<h3 id="思考">思考</h3>
+<p>其实代理的方式有很多种，比如可以直接配置 git 使用代理，和上面的通过配置 ssh 实现代理，不止可以支持 ssh 协议，也可以配置支持 http 和 https 协议。有兴趣的小盆友慢慢折腾，发现新大陆的时候不要忘了分享一下。:-)</p>
+<p><strong>相关文档</strong></p>
+<ul>
+<li><a href="http://daniel.haxx.se/docs/sshproxy.html" target="_blank" rel="external">http://daniel.haxx.se/docs/sshproxy.html</a></li>
+<li><a href="http://www.lainme.com/doku.php/blog/2011/01/透过代理连接ssh" target="_blank" rel="external">http://www.lainme.com/doku.php/blog/2011/01/透过代理连接ssh</a></li>
+</ul>
+]]></content>
+    <summary type="html"><![CDATA[<p>最近墙越来越高，继 github 被和谐后，bitbucket 也沦陷了。这是一件杯具的事情，因为我和 胖子@vfasky  正在上面酝酿我们的 <strong>Catke 计划</strong>，英明神武的我们怎能为万恶的墙低下高贵的头！胖子立马翻出 mac 下的代理神器，稍做配置便让 git 使用 ssh 协议时轻松翻墙。</p>
+<p>详情参考：<a href="https://vfasky.com/2013-05-23/mac-shadowsocks-proxy-bitbucket/" target="_blank" rel="external">mac 上通过 shadowsocks 代理让 bitbucket 的 git 正常工作</a>。</p>
+<h2 id="Windows_上的杯具">Windows 上的杯具</h2>
+<p>但是杯具还在继续，这让哥的 windows 情何以堪！墙虽然灰常高大，但却不能阻挡一个小强翻墙的心。</p>
+]]></summary>
+    
+      <category term="git" scheme="http://rainbo.me/tags/git/"/>
+    
+      <category term="bitbucket" scheme="http://rainbo.me/tags/bitbucket/"/>
+    
+      <category term="windows" scheme="http://rainbo.me/tags/windows/"/>
+    
+      <category term="挨踢" scheme="http://rainbo.me/categories/%E6%8C%A8%E8%B8%A2/"/>
+    
+  </entry>
+  
+</feed>
